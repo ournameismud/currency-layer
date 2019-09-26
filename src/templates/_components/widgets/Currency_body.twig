@@ -1,0 +1,20 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * currencyLayer plugin for Craft CMS
+ *
+ * Currency Widget Body
+ *
+ * @author    cole007
+ * @copyright Copyright (c) 2019 cole007
+ * @link      http://ournameismud.co.uk/
+ * @package   CurrencyLayer
+ * @since     1.0.0
+ */
+#}
+
+{% set iconUrl = view.getAssetManager().getPublishedUrl('@ournameismud/currencylayer/assetbundles/currencywidget/dist', true) ~ '/img/Currency-icon.svg' %}
+
+<img src="{{ iconUrl }}" height="64" width="64" />
+
+<p>{{ message }}</p>

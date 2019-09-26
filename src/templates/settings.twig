@@ -1,0 +1,61 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * currencyLayer plugin for Craft CMS 3.x
+ *
+ * currencyLayer Settings.twig
+ *
+ * @author    cole007
+ * @copyright Copyright (c) 2019 cole007
+ * @link      http://ournameismud.co.uk/
+ * @package   CurrencyLayer
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+{% set currencyData = craft.currencyLayer.getCurrency() %}
+{% set currencyOptions = [
+    { value: '', label: '==='}
+    ] %}
+{% for code, label in currencyData %}
+	{% set currencyOptions = currencyOptions|merge([{
+		value: code,
+		label: label
+	}]) %}
+{% endfor %}
+
+{% do view.registerAssetBundle("ournameismud\\currencylayer\\assetbundles\\currencylayer\\CurrencyLayerAsset") %}
+
+{{ forms.textField({
+    label: 'API Key',
+    instructions: 'Enter some setting here.',
+    id: 'apiKey',
+    name: 'apiKey',
+    value: settings['apiKey']})
+}}
+
+{{ forms.selectField({
+    label: 'Primary Currency',
+    id: 'currencyPrimary',
+    name: 'currencyPrimary',
+    options: currencyOptions,
+    value: settings['currencyPrimary']})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Cache API results?',
+    id: 'apiCache',
+    name: 'apiCache',
+    on: (settings['apiCache'] is defined) ? settings['apiCache'] : ""
+	})
+}}
+
+
+{{ forms.textField({
+    label: 'Cache duration',
+    instructions: 'Value in seconds.',
+    id: 'cacheDuration',
+    name: 'cacheDuration',
+    value: settings['cacheDuration']})
+}}

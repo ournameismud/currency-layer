@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * currencyLayer plugin for Craft CMS
+ *
+ * Currency Widget Settings
+ *
+ * @author    cole007
+ * @copyright Copyright (c) 2019 cole007
+ * @link      http://ournameismud.co.uk/
+ * @package   CurrencyLayer
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("ournameismud\\currencylayer\\assetbundles\\currencylayer\\CurrencyLayerAsset") %}
+
+{{ forms.textField({
+    label: 'Message',
+    instructions: 'Enter a message here.',
+    id: 'message',
+    name: 'message',
+    value: widget['message']})
+}}

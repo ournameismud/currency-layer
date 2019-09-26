@@ -1,0 +1,44 @@
+{
+    "name": "ournameismud/currency-layer",
+    "description": "API integration with https://currencylayer.com/",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "currencylayer"
+    ],
+    "support": {
+        "docs": "https://github.com/ournameismud/currency-layer/blob/master/README.md",
+        "issues": "https://github.com/ournameismud/currency-layer/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "cole007",
+            "homepage": "http://ournameismud.co.uk/"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "ournameismud\\currencylayer\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Currency Layer",
+        "handle": "currency-layer",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/ournameismud/currency-layer/master/CHANGELOG.md",
+        "components": {
+            "api": "ournameismud\\currencylayer\\services\\Api",
+            "currency": "ournameismud\\currencylayer\\services\\Currency"
+        },
+        "class": "ournameismud\\currencylayer\\CurrencyLayer"
+    }
+}
