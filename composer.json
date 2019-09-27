@@ -2,7 +2,7 @@
     "name": "ournameismud/currency-layer",
     "description": "API integration with https://currencylayer.com/",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "craft",
         "cms",

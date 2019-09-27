@@ -43,7 +43,7 @@ class Currency extends Component
     public function parseValues($response)
     {
         $currencyPrimary = CurrencyLayer::$plugin->getSettings()->currencyPrimary;
-        $source = $response['source'];
+        $source = $response['data']->source;
         $quotes = $response['data']->quotes;
 
         $data = [];
