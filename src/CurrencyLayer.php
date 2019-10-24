@@ -10,6 +10,8 @@
 
 namespace ournameismud\currencylayer;
 
+use ournameismud\currencylayer\fields\Currency as CurrencyField;
+
 use ournameismud\currencylayer\services\Api as ApiService;
 use ournameismud\currencylayer\services\Currency as CurrencyService;
 use ournameismud\currencylayer\variables\CurrencyLayerVariable;
@@ -25,6 +27,7 @@ use craft\web\UrlManager;
 use craft\web\Controller;
 use craft\web\twig\variables\CraftVariable;
 use craft\services\Dashboard;
+use craft\services\Fields;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterUrlRulesEvent;
 use yii\base\ActionEvent;
@@ -70,6 +73,15 @@ class CurrencyLayer extends Plugin
         parent::init();
         self::$plugin = $this;
 
+
+        Event::on(
+            Fields::class,
+            Fields::EVENT_REGISTER_FIELD_TYPES,
+            function (RegisterComponentTypesEvent $event) {
+                $event->types[] = CurrencyField::class;
+            }
+        );
+        
         // Detect Craft Commerce save event
         // if set as primary update currency layer currencyPrimary setting
         Event::on(

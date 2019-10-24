@@ -1,0 +1,31 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Currency Layer plugin for Craft CMS 3.x
+ *
+ * Currency Field Input
+ *
+ * @author    @cole007
+ * @copyright Copyright (c) 2019 @cole007
+ * @link      ournameismud.co.uk
+ * @package   CurrencyLayer
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% set currencies = craft.currencyLayer.getCurrency() %}
+{% set options = [] %}
+{% for key, currency in currencies %}
+{% set options = options|merge([{
+	value: key, label: currency
+}]) %}
+{% endfor %}
+
+{{ forms.selectField({
+    options: options,
+    id: name,
+    name: name,
+    value: value})
+}}
