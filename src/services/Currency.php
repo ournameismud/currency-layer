@@ -43,8 +43,8 @@ class Currency extends Component
     public function parseValues($response)
     {
         $currencyPrimary = CurrencyLayer::$plugin->getSettings()->currencyPrimary;
-        $source = $response['data']->source;
-        $quotes = $response['data']->quotes;
+        $source = $response->source;
+        $quotes = $response->quotes;
 
         $data = [];
         if($currencyPrimary && $currencyPrimary != $source) {
@@ -91,6 +91,7 @@ class Currency extends Component
                 $outcome['source'] = 'From Cache';
             else:
                 $response = CurrencyLayer::getInstance()->api->_curl($url);
+                CurrencyLayer::getInstance()->currency->parseCommerce($response); //parse the response in commerce
                 $cacheService->set($cacheKey, $response, $cacheDuration);//set the cache object
                 $outcome['source'] = 'From Source (cached)';
             endif;    
