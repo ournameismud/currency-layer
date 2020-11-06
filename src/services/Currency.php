@@ -42,11 +42,13 @@ class Currency extends Component
     
     public function parseValues($response)
     {
+        if (!is_array($response)) $response = (array)$response;
+        $data = (array_key_exists('data', $response)) ? $response['data'] : $response;
         $currencyPrimary = CurrencyLayer::$plugin->getSettings()->currencyPrimary;
-        $source = $response['data']->source;
-        $quotes = $response['data']->quotes;
+        $source = is_array($data) ? $data['source'] : $data->source;        
+        $quotes = is_array($data) ? $data['quotes'] : $data->quotes;
 
-        $data = [];
+        $output = [];
         if($currencyPrimary && $currencyPrimary != $source) {
             $tmpKey = $source.$currencyPrimary;
             $root = isset($quotes->$tmpKey) ? (1 / $quotes->$tmpKey) : 1;
@@ -54,9 +56,9 @@ class Currency extends Component
             $root = 1;
         }
         foreach ($quotes AS $key => $value) {
-            $data[substr($key,3)] = $value * $root;
+            $output[substr($key,3)] = $value * $root;
         }
-        return $data;
+        return $output;
     }
 
     // Public Methods
@@ -96,10 +98,10 @@ class Currency extends Component
             endif;    
             $outcome['cacheDuration'] = $cacheDuration;            
         else:
-            $response = CurrencyLayer::getInstance()->api->_curl($url);
-            CurrencyLayer::getInstance()->currency->parseCommerce($response);
+            $response = CurrencyLayer::getInstance()->api->_curl($url);            
             $outcome['source'] = 'From Source (nocache)';
         endif;
+        CurrencyLayer::getInstance()->currency->parseCommerce($response);
         $outcome['data'] = json_decode($response);
         return $outcome;
     }

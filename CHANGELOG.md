@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## 1.0.4 - 2020-11-06
+## 1.0.5 - 2020-01-22
 ### Fixed
-- Composer v2 psr-4 error
+- Commerce parse values on cache and API callback fallback (to array)
+
+## 1.0.4 - 2020-01-22
+### Fixed
+- Composer 2 psr-4 error fixed
 
 ## 1.0.3 - 2019-10-24
 ### Added
