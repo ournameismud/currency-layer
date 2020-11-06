@@ -42,6 +42,7 @@ class Currency extends Component
     
     public function parseValues($response)
     {
+        if(property_exists($response,'error')) return ['error'=>$response->error];
         if (!is_array($response)) $response = (array)$response;
         $data = (array_key_exists('data', $response)) ? $response['data'] : $response;
         $currencyPrimary = CurrencyLayer::$plugin->getSettings()->currencyPrimary;
