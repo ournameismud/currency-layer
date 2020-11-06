@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## 1.0.5 - 2020-01-22
 ### Fixed
 - Commerce parse values on cache and API callback fallback (to array)
+- Error fallback from API
 
 ## 1.0.4 - 2020-01-22
 ### Fixed
