@@ -157,8 +157,8 @@ class CurrencyLayer extends Plugin
     {
         $settings = $this->getSettings();
         $currencyPrimary = $settings['currencyPrimary'];
-        $CC = craftCommerce::getInstance();
-        if ($CC) {
+        if (class_exists('craft\commerce\Plugin')) {
+            $CC = craftCommerce::getInstance();
             $currencies = $CC->getPaymentCurrencies();
             foreach($currencies->getAllPaymentCurrencies() AS $currency) {
                 if ($currency->iso == $currencyPrimary) $currency->primary = 1;
@@ -185,8 +185,8 @@ class CurrencyLayer extends Plugin
     protected function settingsHtml(): string
     {
         $settings = $this->getSettings();
-        $CC = craftCommerce::getInstance();
-        if ($CC) {
+        if (class_exists('craft\commerce\Plugin')) {
+            $CC = craftCommerce::getInstance();
             $currencies = $CC->getPaymentCurrencies();
             foreach($currencies->getAllPaymentCurrencies() AS $currency) {
                 if ($currency->primary) $settings['currencyPrimary'] = $currency->iso;

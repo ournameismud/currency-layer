@@ -31,8 +31,8 @@ class CurrencyLayerVariable
      */
     public function getCurrency($optional = null)
     {
-        $CC = craftCommerce::getInstance();
-        if ($CC) {
+        if (class_exists('craft\commerce\Plugin')) {
+            $CC = craftCommerce::getInstance();        
             $currencyPrimary = CurrencyLayer::$plugin->getSettings()->currencyPrimary;
             // Craft::dd($currencyPrimary = CurrencyLayer::$plugin->getSettings()->currencyPrimary );
             $currencies = $CC->getPaymentCurrencies();

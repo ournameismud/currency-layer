@@ -25,8 +25,8 @@ class Currency extends Component
     protected function parseCommerce($response)
     {
         $data = $this->parseValues(json_decode($response));
-        $CC = craftCommerce::getInstance();
-        if ($CC) {
+        if (class_exists('craft\commerce\Plugin')) {
+            $CC = craftCommerce::getInstance();
             $currencyPrimary = CurrencyLayer::$plugin->getSettings()->currencyPrimary;
             $currencies = $CC->getPaymentCurrencies();
             foreach($currencies->getAllPaymentCurrencies() AS $currency) {
