@@ -81,12 +81,12 @@ class CurrencyLayer extends Plugin
                 $event->types[] = CurrencyField::class;
             }
         );
-        
+
         // Detect Craft Commerce save event
         // if set as primary update currency layer currencyPrimary setting
         Event::on(
-            Controller::class, 
-            Controller::EVENT_BEFORE_ACTION, 
+            Controller::class,
+            Controller::EVENT_BEFORE_ACTION,
             function(ActionEvent $event) {
                 $request = Craft::$app->getRequest();
                 $action = $request->getParam('action');
@@ -95,7 +95,7 @@ class CurrencyLayer extends Plugin
                     $CC = craftCommerce::getInstance();
                     $iso = $request->getParam('iso');
                     $primary = $request->getParam('primary');
-                    if ($primary) $this->settings['currencyPrimary'] = $iso; 
+                    if ($primary) $this->settings['currencyPrimary'] = $iso;
                 }
             }
         );
@@ -116,13 +116,13 @@ class CurrencyLayer extends Plugin
             }
         );
 
-        Event::on(
-            Dashboard::class,
-            Dashboard::EVENT_REGISTER_WIDGET_TYPES,
-            function (RegisterComponentTypesEvent $event) {
-                $event->types[] = CurrencyWidget::class;
-            }
-        );
+        // Event::on(
+        //     Dashboard::class,
+        //     Dashboard::EVENT_REGISTER_WIDGET_TYPES,
+        //     function (RegisterComponentTypesEvent $event) {
+        //         $event->types[] = CurrencyWidget::class;
+        //     }
+        // );
 
         Event::on(
             CraftVariable::class,
@@ -153,7 +153,7 @@ class CurrencyLayer extends Plugin
         );
     }
     // use this to upate the primary Craft Commerce currency if currencyPrimary value is changed
-    public function afterSaveSettings() 
+    public function afterSaveSettings()
     {
         $settings = $this->getSettings();
         $currencyPrimary = $settings['currencyPrimary'];
@@ -177,7 +177,7 @@ class CurrencyLayer extends Plugin
     protected function createSettingsModel()
     {
         return new Settings();
-    }    
+    }
 
     /**
      * @inheritdoc
